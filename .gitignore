@@ -4,3 +4,4 @@
 *.iml
 .terraform.lock.hcl
 *.tfplan
+.terragrunt-cache

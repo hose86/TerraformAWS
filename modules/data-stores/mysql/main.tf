@@ -1,5 +1,13 @@
 provider "aws" {
   region = "us-east-2"
+
+  # Allow any 2.x version of the AWS provider
+  version = "~> 2.0"
+}
+
+terraform {
+  required_version = "= 1.1.4"
+  backend "s3" {}
 }
 
 resource "aws_db_instance" "example" {

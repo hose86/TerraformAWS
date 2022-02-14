@@ -1,6 +1,17 @@
+provider "aws" {
+  region = "us-east-2"
+
+  # Allow any 2.x version of the AWS provider
+  version = "~> 2.0"
+}
+
+terraform {
+  required_version = "= 1.1.4"
+  backend "s3" {}
+}
+
 module "asg" {
-  source 	= "../../cluster/asg-rolling-deploy"
-  
+ source 	= "../../cluster/asg-rolling-deploy"
   cluster_name	= "hello-world-${var.environment}"
   ami		= var.ami
   user_data	= data.template_file.user_data.rendered
@@ -19,7 +30,6 @@ module "asg" {
 
 module "alb" {
   source	= "../../networking/alb"
-
   alb_name	= "hello-world-${var.environment}"
   subnet_ids	= data.aws_subnet_ids.default.ids
 }
